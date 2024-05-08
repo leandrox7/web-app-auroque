@@ -1,0 +1,15 @@
+<div class="chip-form-container">
+    <form [formGroup]="chipForm" (ngSubmit)="onSubmit()">
+      <label for="chipNumber">Número de Identificação do Chip:</label>
+      <input id="chipNumber" formControlName="chipNumber" type="text" required>
+  
+      <label for="animalNumber">Número de Identificação do Animal:</label>
+      <input id="animalNumber" formControlName="animalNumber" type="text" required>
+  
+      <label for="installationDate">Data de Instalação:</label>
+      <input id="installationDate" formControlName="installationDate" type="date" required>
+  
+      <button type="submit" [disabled]="!chipForm.valid">Registrar Chip</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,78 @@
+.sidenav-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  mat-sidenav {
+    width: 250px; // Ajuste a largura conforme necessário
+    box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  }
+  
+  mat-sidenav-content {
+    transition: margin 300ms; // Suaviza a transição do conteúdo
+  }
+  
+  .content {
+    margin-top: 1rem;
+    padding: 2rem; // Adiciona um espaçamento dentro da área de conteúdo
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-nav-list {
+    display: flex;
+    flex-direction: column;
+  }
+  a[mat-list-item] {
+    width: 100%;  /* Ocupa toda a largura do contêiner */
+    height: 50px;
+    display: block; /* Quebra a linha após o item */
+    color: inherit; /* Inherits color from the parent */
+    text-decoration: none; /* Removes underline */
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-left: 10px;
+    padding-top: 5px;
+
+   // text-align: center;
+  }
+
+  /* Style for the side navigation container */
+.sidenav-container {
+  height: 100%;
+}
+
+/* Style for navigation links */
+mat-nav-list a {
+  width: 100%; /* Full width to align center */
+  justify-content: center; /* Center items in the list */
+  text-decoration: none; /* Removes underline from links */
+  color: black; /* Sets the text color to black */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover effect */
+mat-nav-list a:hover {
+  background-color: rgba(0,0,0,0.1); /* Adds shadow on hover */
+}
+
+/* Mat-icon in the navigation links */
+mat-icon {
+  margin-right: 8px; /* Adds spacing between the icon and text */
+}
+
+/* Removes the default blue link color and underline */
+a {
+  color: inherit; /* Inherits color from the parent */
+  text-decoration: none; /* Removes underline */
+}
+
+/* Aligns icons and text in the middle of the nav list items */
+mat-list-item {
+  display: flex;
+ // align-items: center;
+  height: 100%;
+}

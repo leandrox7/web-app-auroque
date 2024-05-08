@@ -1,0 +1,75 @@
+.mat-card {
+    max-width: 600px; // Você pode ajustar este valor conforme necessário
+    margin: auto; // Isso centraliza o card horizontalmente na página
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); // Apenas para um pouco de sombra estética, opcional
+    padding: 20px; // Espaço interno para estética
+
+  }
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px; // Espaçamento entre elementos na mesma linha
+  }
+  
+  .form-field {
+    flex: 1; // Faz com que cada campo de formulário preencha o espaço equitativamente
+    margin-right: 10px; // Adiciona margem à direita de cada campo, exceto o último
+  
+    &:last-child {
+      margin-right: 0; // Remove a margem do último elemento
+    }
+}
+mat-select {
+  flex: 1; // Faz com que cada campo de formulário preencha o espaço equitativamente
+
+}
+  
+  mat-card-header {
+    display: flex;
+    justify-content: flex-start; // Alinha o título à direita do card
+  }
+  
+  mat-card-title {
+    font-size: 30px; // Ajuste conforme necessário
+    margin-bottom: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center; // Centraliza o botão horizontalmente
+    padding-top: 20px; // Adiciona um pouco de espaço acima do botão
+  }
+  
+  button {
+    padding: 10px 20px; // Ajusta o preenchimento interno do botão para melhor encaixe do texto
+    min-width: auto; // Remove a largura mínima padrão do Angular Material
+    box-sizing: border-box; // Garante que o padding esteja incluído na largura total
+  }
+  
+
+  @media (max-width: 768px) {
+    .mat-card {
+      max-width: 95%;
+      margin: 20px auto; // Aumenta a margem em dispositivos menores para melhor visualização
+    }
+  }
+
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }

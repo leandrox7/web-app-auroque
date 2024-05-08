@@ -1,0 +1,22 @@
+/* Add your CSS rules here, following the style you provided for the vaccine card. */
+.mat-card {
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-row {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+  }
+  .form-field {
+    flex: 1;
+    margin-right: 10
+  }

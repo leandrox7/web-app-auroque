@@ -1,0 +1,32 @@
+.sidenav-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+mat-sidenav {
+  width: 250px; // Ajuste a largura conforme necessário
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+mat-sidenav-content {
+  transition: margin 300ms; // Suaviza a transição do conteúdo
+}
+
+.content {
+  margin-top: 1rem;
+  padding: 2rem; // Adiciona um espaçamento dentro da área de conteúdo
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-nav-list {
+  display: flex;
+  flex-direction: column;
+}
+a[mat-list-item] {
+  width: 100%;  /* Ocupa toda a largura do contêiner */
+  display: block; /* Quebra a linha após o item */
+}

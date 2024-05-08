@@ -1,0 +1,26 @@
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .container {
+    padding: 40px;
+    background-color: white;
+}
+
+.button-container {
+    text-align: right;
+    margin-bottom: 10px; // Adds spacing between the button and the form field
+}
+
+.actions {
+    width: 100%; /* Same width as the cards to align the button */
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    margin-bottom: 20px; /* Space above the list */
+  }
