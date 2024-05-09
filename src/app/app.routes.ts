@@ -15,9 +15,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 export const routes: Routes = [
     { path: '', component: PrincipalComponent },
     { path: 'login', component: LoginComponent },
-    /*{ path: 'home', component: HomeComponent, children: [
+    { path: 'home', component: HomeComponent, children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },  // Adiciona redirecionamento padrão para 'dashboard'
-      { path: 'dashboard', component: DashboardComponent }
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'vacina', component: RegisterVaccineComponent }, // Certifique-se de que 'vacinas' está correto
       { path: 'vacina/:id', component: RegisterVaccineComponent }, // Certifique-se de que 'vacinas' está correto
       { path: 'vacinas', component: ListVaccinesComponent },
@@ -29,10 +29,9 @@ export const routes: Routes = [
       { path: 'user/:id', component: RegisterUserComponent },
       { path: 'users', component: ListUsersComponent } 
 
-
     ]
   },
-  { path: 'teste', component: RegisterVaccineComponent},*/
+  { path: 'teste', component: RegisterVaccineComponent},
 
     // outras rotas aqui, se necessário
 ];
