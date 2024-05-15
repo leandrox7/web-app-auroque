@@ -10,6 +10,7 @@ import { RegisterUserComponent } from './pages/cadastro/register-user/register-u
 import { ListCattlesComponent } from './pages/cadastro/list-cattles/list-cattles.component';
 import { ListUsersComponent } from './pages/cadastro/list-users/list-users.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PropertyComponent } from './pages/cadastro/property/property.component';
 
 
 export const routes: Routes = [
@@ -27,8 +28,8 @@ export const routes: Routes = [
       { path: 'cattle/:id', component: RegisterCattlesComponent }, // Detail view route for a specific cattle
       { path: 'user', component: RegisterUserComponent },
       { path: 'user/:id', component: RegisterUserComponent },
-      { path: 'users', component: ListUsersComponent } 
-
+      { path: 'users', component: ListUsersComponent },
+      { path: 'property', component: PropertyComponent }  
     ]
   },
   { path: 'teste', component: RegisterVaccineComponent},
