@@ -6,6 +6,7 @@
       <a mat-list-item href="/home/vacinas"><mat-icon>vaccines</mat-icon><span>Farmácia</span></a>
       <a mat-list-item href="/home/cattles"><mat-icon>pets</mat-icon><span>Rebanho</span></a>
       <a mat-list-item href="/home/users"><mat-icon>person</mat-icon><span>Usuários</span></a>
+      <a mat-list-item href="/home/property"><mat-icon>gite</mat-icon><span>Propriedade</span></a>
       <a mat-list-item href="#"><mat-icon>scatter_plot</mat-icon><span>Manejos</span></a>
       <a mat-list-item href="#"><mat-icon>gite</mat-icon><span>Piquetes</span></a>
     </mat-nav-list>
@@ -18,7 +19,9 @@
       <span>Auroque</span>
     </mat-toolbar>
     <div class="content">
-      <router-outlet></router-outlet> <!-- This renders the child components -->
+      <router-outlet>
+        <app-loader></app-loader>
+      </router-outlet> <!-- This renders the child components -->
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

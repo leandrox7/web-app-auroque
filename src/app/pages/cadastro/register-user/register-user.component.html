@@ -3,7 +3,15 @@
       <mat-card-title>
         <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
           <span></span>
-          <span>Cadastro de Usuário</span>
+          @if(isEdition){
+            <span>Edição de Usuário</span>
+          }
+          @else { <span>Cadastro de Usuário</span>}
+         
+          <span></span>
+        <br>
+        <br> <br>
+
         </div>
       </mat-card-title>
     </mat-card-header>
@@ -19,14 +27,17 @@
             <mat-label>Sobrenome</mat-label>
             <input matInput formControlName="lastName" required>
           </mat-form-field>
-        </div>
-  
-        <div class="form-row">
+
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>E-mail</mat-label>
             <input matInput formControlName="email" type="email" required>
           </mat-form-field>
+
+        </div>
   
+        <div class="form-row">
+       
+   
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Nome de Usuário</mat-label>
             <input matInput formControlName="username" required>
@@ -36,9 +47,14 @@
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Senha</mat-label>
-            <input matInput formControlName="password" type="password" required>
+            <input matInput formControlName="password" type="password">
           </mat-form-field>
   
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Confirme a Senha</mat-label>
+            <input matInput formControlName="password" type="password" >
+          </mat-form-field>
+
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Função na Propriedade</mat-label>
             <input matInput formControlName="role">
@@ -47,7 +63,7 @@
   
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Informações de Contato</mat-label>
+            <mat-label>Telefone</mat-label>
             <input matInput formControlName="contactInfo">
           </mat-form-field>
   
@@ -61,7 +77,20 @@
         </div>
   
         <div class="form-row button-container">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Registrar</button>
+
+          <button mat-raised-button color="primary" (click)="redirectToUserList()">Cancelar</button>
+
+          @if(isEdition)
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Salvar</button>
+
+          }
+          @else
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Registrar</button>
+
+          }
+
         </div>
       </form>
     </mat-card-content>

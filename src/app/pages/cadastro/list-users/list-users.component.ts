@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { IUser } from '../../../Interface/IUser';
+import { Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';  // Correct import for HttpClientModule
 
-
+/*
 export interface User {
   id: number;
   idProperty: number
@@ -22,18 +26,24 @@ const ELEMENT_DATA: User[] = [
   {id: 3, idProperty: 1, name: 'Marcos Kawasky Shitz', email: "marcosKawasky.S.@outlook.com", gender: 'Male', status: "Ativo", startEmployDate: new Date('2015-01-09')},
   {id: 4, idProperty: 1, name: 'José Carlos Cristolo', email: "jcristolo@gmail.com", gender: 'Male', status: "Ativo", startEmployDate: new Date('2012-12-16')},
 ];
+*/
 @Component({
   selector: 'app-list-users',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, MatFormFieldModule, MatButtonModule],
+  imports: [MatTableModule, MatInputModule, MatFormFieldModule, MatButtonModule, HttpClientModule],
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.scss'
-})
-export class ListUsersComponent {
-  displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status', 'startEmployDate'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+})export class ListUsersComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'name', 'email', 'user', 'status', 'function'];
+  dataSource!: MatTableDataSource<IUser>;
 
-  constructor(private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe(users => {
+      this.dataSource = new MatTableDataSource(users);
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

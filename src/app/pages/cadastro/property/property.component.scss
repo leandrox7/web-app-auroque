@@ -1,0 +1,72 @@
+/* Add your CSS rules here, following the style you provided for the vaccine card. */
+.mat-card {
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-row {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+  }
+  .form-field {
+    flex: 1;
+    margin-right: 10
+  }
+  @import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.line-1 {
+    display: flex;
+    justify-content: space-between; // Espaçamento igual entre os cartões
+    margin: 20px 0; // Margem superior e inferior para a linha
+  
+    .dashboard-card {
+      flex: 1; // Faz cada cartão ocupar espaço igual
+      margin: 0 10px; // Margem entre os cartões
+  
+      // Estilos opcionais para o cabeçalho e conteúdo do cartão
+      mat-card-header {
+        background-color: #f8f9fa;
+      }
+  
+      mat-card-content {
+        padding: 20px;
+      }
+    }
+  }
+  
+  .line-2 {
+    display: flex;
+    justify-content: space-between; // Espaçamento igual entre os cartões
+    flex-direction: column;
+    margin: 20px 0; // Margem superior e inferior para a linha
+  
+    .dashboard-card {
+      flex: 1; // Faz cada cartão ocupar espaço igual
+      margin: 0 10px; // Margem entre os cartões
+  
+      // Estilos opcionais para o cabeçalho e conteúdo do cartão
+      mat-card-header {
+        background-color: #f8f9fa;
+      }
+  
+      mat-card-content {
+        padding: 20px;
+      }
+    }
+  }
+  .mat-icon{
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
+  .dashboard-animals-h{
+    font-size: 80px; }

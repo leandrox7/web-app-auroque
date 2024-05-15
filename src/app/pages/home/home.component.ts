@@ -14,7 +14,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { RegisterVaccineComponent } from '../../pages/cadastro/register-vaccine/register-vaccine.component';
 import { RouterModule, Routes } from '@angular/router'; // Ensure RouterModule and Routes are imported
-
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { LoaderModule } from '../../components/loader/loader.module';
+import { LoaderInterceptor } from '../../components/loader.intercept';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -28,7 +30,9 @@ import { RouterModule, Routes } from '@angular/router'; // Ensure RouterModule a
     MatInputModule,
     MatIconModule,
     RegisterVaccineComponent,
-    RouterModule
+    RouterModule,
+    LoaderComponent,
+    LoaderModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
