@@ -2,7 +2,8 @@
 /node_modules/
 
 /angular/
-
+.angular*
+/.angular*
 # Logs
 logs
 *.log
