@@ -14,15 +14,22 @@ interface JwtPayload {
 export class AuthService {
   constructor() {}
 
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const test = 'localStorageTest';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   getToken(): string | null {
-    try{
+    if (this.isLocalStorageAvailable()) {
       return localStorage.getItem('token');
     }
-    catch(e)
-    {
-      return null;
-    }
-     
+    return null;
   }
   isTokenExpired(token: string): boolean {
     try {
