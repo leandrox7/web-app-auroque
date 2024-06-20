@@ -15,9 +15,13 @@ export class AuthService {
   constructor() {}
 
   getToken(): string | null {
+    try{
       return localStorage.getItem('token');
-    
-   
+    }
+    catch(e)
+    {
+      return null;
+    }
      
   }
   isTokenExpired(token: string): boolean {
