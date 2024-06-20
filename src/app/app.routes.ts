@@ -11,12 +11,13 @@ import { ListCattlesComponent } from './pages/cadastro/list-cattles/list-cattles
 import { ListUsersComponent } from './pages/cadastro/list-users/list-users.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PropertyComponent } from './pages/cadastro/property/property.component';
+import { AuthGuard } from '../app/services/auth.guard'; // Importe o AuthGuard
 
 
 export const routes: Routes = [
     { path: '', component: PrincipalComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent, children: [
+    { path: 'home', component: HomeComponent,  canActivate: [AuthGuard],  children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },  // Adiciona redirecionamento padrão para 'dashboard'
       { path: 'dashboard', component: DashboardComponent },
       { path: 'vacina', component: RegisterVaccineComponent }, // Certifique-se de que 'vacinas' está correto

@@ -3,7 +3,8 @@ import {
   CdkOverlayOrigin,
   Overlay,
   OverlayModule
-} from "./chunk-5IXEEPWI.js";
+} from "./chunk-YPD4VZ33.js";
+import "./chunk-ZJ2ARF72.js";
 import {
   MAT_FORM_FIELD,
   MatError,
@@ -14,7 +15,11 @@ import {
   MatLabel,
   MatPrefix,
   MatSuffix
-} from "./chunk-3V2P7W2E.js";
+} from "./chunk-NBOABGDA.js";
+import {
+  CdkScrollableModule,
+  ViewportRuler
+} from "./chunk-D4PRBHMP.js";
 import {
   animate,
   animateChild,
@@ -23,20 +28,16 @@ import {
   style,
   transition,
   trigger
-} from "./chunk-5XBQGQGZ.js";
-import {
-  CdkScrollableModule,
-  ViewportRuler
-} from "./chunk-STLHL5DB.js";
+} from "./chunk-G64SS3KG.js";
 import {
   SelectionModel
-} from "./chunk-CBIJG4PQ.js";
+} from "./chunk-7GFJO2T5.js";
 import {
   FormGroupDirective,
   NgControl,
   NgForm,
   Validators
-} from "./chunk-5TE3MI7Q.js";
+} from "./chunk-KAS3HDNO.js";
 import {
   A,
   ActiveDescendantKeyManager,
@@ -61,11 +62,11 @@ import {
   addAriaReferencedId,
   hasModifierKey,
   removeAriaReferencedId
-} from "./chunk-K7KZA4U6.js";
+} from "./chunk-275Q57W3.js";
 import {
   CommonModule,
   NgClass
-} from "./chunk-5BGBS3QE.js";
+} from "./chunk-DGV72MND.js";
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -126,21 +127,24 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵviewQuery
-} from "./chunk-2VCD6BVS.js";
+} from "./chunk-4RVK6YC4.js";
+import {
+  defer,
+  merge
+} from "./chunk-V2DXGMIT.js";
+import "./chunk-UKEHM6V6.js";
 import {
   Subject,
-  defer,
   distinctUntilChanged,
   filter,
   map,
-  merge,
   startWith,
   switchMap,
   take,
   takeUntil
-} from "./chunk-S3AEO27K.js";
+} from "./chunk-ZDOIMVJD.js";
 
-// ../../../../node_modules/@angular/material/fesm2022/select.mjs
+// node_modules/@angular/material/fesm2022/select.mjs
 var _c0 = ["trigger"];
 var _c1 = ["panel"];
 var _c2 = [[["mat-select-trigger"]], "*"];

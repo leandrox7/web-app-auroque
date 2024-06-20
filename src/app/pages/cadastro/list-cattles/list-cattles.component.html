@@ -16,26 +16,42 @@
             <td mat-cell *matCellDef="let element" (click)="redirectToCattle(element.id)"> {{element.id}} </td>
         </ng-container>
     
+         <!-- Weight Column -->
+         <ng-container matColumnDef="visualId">
+            <th mat-header-cell *matHeaderCellDef> ID Visual </th>
+            <td mat-cell *matCellDef="let element"> {{element.visualId}} </td>
+        </ng-container>
+    
         <!-- Breed Column -->
-        <ng-container matColumnDef="breed">
-            <th mat-header-cell *matHeaderCellDef> Raça </th>
-            <td mat-cell *matCellDef="let element"> {{element.breed}} </td>
+        <ng-container matColumnDef="birthDate">
+            <th mat-header-cell *matHeaderCellDef> Idade </th>
+            <td mat-cell *matCellDef="let element"> {{GetBirthDate(element.birthDate)}} </td>
         </ng-container>
     
     
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Peso </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-        </ng-container>
-    
+       
         <!-- Gender Column -->
         <ng-container matColumnDef="gender">
             <th mat-header-cell *matHeaderCellDef> Sexo </th>
-            <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+            <td mat-cell *matCellDef="let element"> {{GetGender(element.gender)}} </td>
         </ng-container>
     
-      
+        <!-- Gender Column -->
+        <ng-container matColumnDef="animalTypeId">
+            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+            <td mat-cell *matCellDef="let element"> {{GetAnimalType(element.animalTypeId)}} </td>
+        </ng-container>
+        
+        <!-- Gender Column -->
+          <ng-container matColumnDef="animalSubtypeId">
+            <th mat-header-cell *matHeaderCellDef> Subcategoria </th>
+            <td mat-cell *matCellDef="let element"> {{GetAnimalSubType(element.animalSubtypeId)}} </td>
+        </ng-container>
+          <!-- Gender Column -->
+          <ng-container matColumnDef="piqueteId">
+            <th mat-header-cell *matHeaderCellDef> Piquete </th>
+            <td mat-cell *matCellDef="let element"> {{GetPiquete(element.piqueteId)}} </td>
+        </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="redirectToCattle(row.id)"></tr>

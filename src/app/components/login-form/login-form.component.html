@@ -3,6 +3,7 @@
 
   <div class="container">
 
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
     <div class="block" style="flex: 1; margin-top: 40%;">
   <strong class="title-form">AUROQUE</strong>
     </div>
@@ -12,32 +13,29 @@
           <mat-label>Enter your email</mat-label>
           <input matInput
                  placeholder="pat@example.com"
-                 formControlName="email"
-                 (blur)="updateErrorMessage()"
+                 formControlName="username"
                  required>
-                 @if (email.invalid) {
-                  <mat-error>{{errorMessage}}</mat-error>
-                }
+                
         </mat-form-field>
     
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput
                  type="password"
-                 placeholder="Enter your password"
+                 placeholder="senha"
                  formControlName="password"
                  required>
         </mat-form-field>        
 
-        <a href="/home"  mat-flat-button color="primary">Entrar</a>
-        
+        <button mat-flat-button color="primary" type="submit">Entrar</button>
+
     
       </div>  </div>
     <div class="block" style="flex: 1;">
       <!-- Conteúdo do terceiro bloco -->
     </div>
   
-    
+  </form>
   </div>
   
 </div>

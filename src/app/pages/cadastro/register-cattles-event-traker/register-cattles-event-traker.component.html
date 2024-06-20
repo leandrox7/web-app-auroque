@@ -12,40 +12,69 @@
         <div class="form-row" style="margin: 10px;">
            <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Tipo de Registro</mat-label>
-                <mat-select formControlName="typeEvent">
-                    <mat-option value="Male" selected>Vacinacao</mat-option>
-                    <mat-option value="Female">Morte</mat-option>
-                    <mat-option value="Female">Parto</mat-option>
-                    <mat-option value="Female">Doença</mat-option>
-                    <mat-option value="Female">Gravidez</mat-option>
-                    <mat-option value="Female">Venda</mat-option>
-                    <mat-option value="Female">Abate</mat-option>
-                    <mat-option value="Female">Vacina</mat-option>
-                    <mat-option value="Female">Fuga</mat-option>
-                    <mat-option value="Female">Desmame</mat-option>
-                    <mat-option value="Female">Outro</mat-option>
+                <mat-select formControlName="typeId">
+                  @for (item of eventTypes; track item.id){
+
+                    <mat-option  [value]=item.id>
+                      {{ item.description }}
+                      
+                    </mat-option>
+                  }
                 </mat-select>
             </mat-form-field>
          
            
 
+           @if(trackerEventForm.get('typeId')?.value == 3){
+
+            <div class="form-row">
+
+              <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Peso</mat-label>
+                <input matInput type="number" formControlName="description" required>
+            </mat-form-field>
+            </div>
+
+
+           }
+
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Data</mat-label>
-                <input matInput type="date" formControlName="eventDate" required>
+                <input matInput type="date" formControlName="date" required>
             </mat-form-field>
 
            
           </div>
 
-          <div class="form-row">
-            <mat-form-field appearance="fill" class="form-field">
-                <mat-label>Descrição</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
-              </mat-form-field>
-          </div>
+          
+          @if(trackerEventForm.get('typeId')?.value != 3){
+
+            <div class="form-row">
+
+              <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Titulo</mat-label>
+                <input matInput  formControlName="title" >
+            </mat-form-field>
+            </div>
+  
+            <div class="form-row">
+  
+              <mat-form-field appearance="fill" class="form-field">
+                  <mat-label>Descrição</mat-label>
+                  <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+
+
+          }
+        
 
           <div class="form-row button-container">
-            <button mat-raised-button color="primary" type="submit">Registrar</button>
+
+            <button mat-raised-button color="primary" (click)="resetForm()">Limpar</button>
+  
+            <button mat-raised-button color="primary" type="submit" [disabled]="!trackerEventForm.valid">Registrar</button>
+    
           </div>
 </form>
     </mat-card-content>

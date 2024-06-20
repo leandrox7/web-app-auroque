@@ -12,6 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IUser } from '../../../Interface/IUser';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { IRole } from '../../../Interface/IRole';
+import { IUserRole } from '../../../Interface/IUserRole';
+
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
@@ -32,27 +36,42 @@ import { IUser } from '../../../Interface/IUser';
 export class RegisterUserComponent implements OnInit {
   userForm!: FormGroup;
   isEdition!: boolean;
+  private timer: any;
+  roles: IRole[] = [];  // Guarda os perfis de acesso
+  userRoles!: IUserRole[];
 
+  
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private _snackBar: MatSnackBar) { }
 
   private initializeForm(): void {
     this.userForm = this.fb.group({
-      id: [''],
+      id: 0,
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
+      login: ['', Validators.required],
+      birthDate: ['', Validators.required],
       password: ['', this.isEdition ? Validators.nullValidator : Validators.required],
-      role: [''],
+      roleName: [''],
       contactInfo: [''],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      phoneNumber: [''],
+      userRoles: []
     });
   }
 
   ngOnInit(): void {
+
+    this.userService.getRoles().subscribe({
+      next: (_roles: IRole[]) => this.roles = _roles,
+      error: (err: any) => console.error('Error fetching roles:', err)
+    });
+
+
     this.route.paramMap.subscribe(params => {
       this.isEdition = !!params.get('id');
       console.log('Is edition:', this.isEdition);
@@ -77,11 +96,15 @@ export class RegisterUserComponent implements OnInit {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      username: user.login,  // Assumindo que 'login' corresponde a 'username'
+      login: user.login,  // Assumindo que 'login' corresponde a 'username'
+      birthDate: user.birthDate,
       password: '',  // Senhas normalmente não são recuperadas
-      role: user.roleName,
-      contactInfo: '',  // Supondo que isso precisa ser ajustado
-      status: user.isActive ? 'Ativo' : 'Inativo'
+      roleName: user.roleName,
+      contactInfo: user.observation,  // Supondo que isso precisa ser ajustado
+      status: user.isActive ? 'Active' : 'Inactive',
+      phoneNumber: user.phoneNumber,
+      userRoles: user?.userRoles?.length > 0 ? user.userRoles[0].id : null
+
     });
   }
 
@@ -93,17 +116,45 @@ export class RegisterUserComponent implements OnInit {
   onSubmit(): void {
     if (this.userForm.valid) {
 
+console.log(this.roles);
+     // const selectedRole = this.roles.filter(role => role.id == this.userForm.value.userRoles);
+
+      const selectedRoleIds = this.userForm.value.userRoles as number[]; // Assuming multiple roles can be selected
+      const selectedRoles = this.roles.filter(role => role.id == this.userForm.value.userRoles);
+  
+      // Prepare the user roles objects array for submission
+    const userRolesToSend = selectedRoles.map(role => ({
+      id: 0, // Assuming 'id' is set by the server if needed
+      userId: this.userForm.value.id,
+      roleId: role.id,
+      
+    }));
+
+    this.userForm.value.userRoles = userRolesToSend;
+
       if (this.isEdition) {
         this.userService.updateUser(this.userForm.value).subscribe({
-          next: (res) => console.log('User registered successfully!', res),
-          error: (err) => console.error('Error registering user:', err)
+          next: (res) => {console.log('User registered successfully!', res)
+          this.openSnackBar('Usuário atualizado!', '')
+          this.redirectAfterFiveSeconds();
+
+        },
+          error: (err) => {console.error('Error registering user:', err)
+          this.openSnackBar('Error:', err)
+        }
         });
       }
 
       else {
         this.userService.registerUser(this.userForm.value).subscribe({
-          next: (res) => console.log('User registered successfully!', res),
-          error: (err) => console.error('Error registering user:', err)
+          next: (res) =>{ console.log('User registered successfully!', res)
+          this.openSnackBar('Usuário criado!', '')
+          this.redirectAfterFiveSeconds();
+
+        },
+          error: (err) => { console.error('Error registering user:', err)
+          this.openSnackBar('Error:', err)
+        }
         });
       }
     }
@@ -112,5 +163,24 @@ export class RegisterUserComponent implements OnInit {
         console.log('Form is not valid');
       
 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{
+      duration: 4000
+    });
+  }
+
+
+  redirectAfterFiveSeconds() {
+    this.timer = setTimeout(() => {
+      this.router.navigate(['/home/users']);
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 }

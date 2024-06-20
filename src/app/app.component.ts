@@ -10,5 +10,5 @@ import { LoaderModule } from './components/loader/loader.module';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'web-app-auroque';
+  title = 'Auroque';
 }

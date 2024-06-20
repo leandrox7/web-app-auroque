@@ -1,14 +1,23 @@
 export interface ICattle {
-    id: number;                 // Unique identifier
-    idVisualIdentification: string;  // Visual ID, like a tag or collar number
-    idSisbovIdentification: string;  // SISBOV ID for tracking cattle in Brazil
-    gender: string;  // Gender of the animal
-    animalType: string;         // General type, e.g., "Cattle", "Sheep"
-    animalSubtype: string;      // More specific type, e.g., "Dairy cattle", "Beef cattle"
-    breed: string;              // Breed of the animal
-    origin: string;             // Where the animal originated
-    purpose: string;            // Purpose for which the animal is raised
-    birthDate: Date;            // Date of birth
-    vaccinationStatus: string;  // Vaccination status, e.g., "Up to date", "Pending"
-    weight: number;             // Current weight in kilograms
+  id: number;
+    sisbovId: string;
+    piqueteId: number;
+    visualId: string;
+    propertyId: number;
+    animalTypeId: number;
+    animalSubtypeId: number;
+    breedId: number;
+    birthDate: Date; // ou Date se você estiver usando objetos Date no TypeScript
+    fatherId: number | null; // pode ser null se a informação não estiver disponível
+    motherId: number | null; // pode ser null se a informação não estiver disponível
+    gender: 'Male' | 'Female';
+    pregnant: boolean;
+    destinationId: number;
+    originId: number;
+    vaccinationStatusId: number;
+    isActive: boolean;
+    createdBy: number;
+    lastUpdatedBy: number;
+    createdAt: string; // ou Date
+    updatedAt: Date; // ou Date
   }

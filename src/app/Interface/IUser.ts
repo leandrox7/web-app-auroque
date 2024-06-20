@@ -1,3 +1,6 @@
+import { IRole } from "./IRole";
+import { IUserRole } from "./IUserRole";
+
 export interface IUser {
     id: number;
     firstName: string;
@@ -15,6 +18,7 @@ export interface IUser {
     updatedAt: string;           // ISO 8601 format date string
     lastUpdatedBy: string;
     createdBy: string;
-    userRoles: any[];            // More specific type can be used if structure of roles is known
+    userRoles: IUserRole[];      // More specific type can be used if structure of roles is known
+    phoneNumber: string;
   }
   

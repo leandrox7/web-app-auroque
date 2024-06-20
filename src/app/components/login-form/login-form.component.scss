@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    justify-content: center; // Alinha o conteúdo ao centro horizontalmente
+    justify-content: flex-start; // Alinha o conteúdo ao centro horizontalmente
     align-items: center; // Alinha o conteúdo ao centro verticalmente
     height: 70%; // Ocupa a altura total da viewport
     margin-left: 15%;
@@ -38,4 +38,5 @@
 
         .background{
           background-color: white;
+
         }

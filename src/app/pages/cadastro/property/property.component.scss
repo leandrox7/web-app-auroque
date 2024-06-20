@@ -70,3 +70,8 @@
 
   .dashboard-animals-h{
     font-size: 80px; }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end; // Alinha os itens à direita
+    }

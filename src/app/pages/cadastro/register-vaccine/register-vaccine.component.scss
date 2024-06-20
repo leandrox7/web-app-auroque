@@ -73,3 +73,8 @@ mat-select {
   input.example-right-align {
     -moz-appearance: textfield;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end; // Alinha os itens à direita
+  }

@@ -1,68 +1,67 @@
 import { Injectable } from '@angular/core';
 import { IEvent } from '../Interface/IEvent';
 import { ICattle } from '../Interface/ICattle';
+import { environment } from '../../environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IGenericItem } from '../Interface/IGenericItem';
+import { map } from 'rxjs/operators';
+import { ICattleEvent } from '../Interface/ICattleEvent';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CattleDataService {
 
-  constructor() { 
-
-    const cattleMock: ICattle = {
-      id: 123,
-      idVisualIdentification: "VIS123",
-      idSisbovIdentification: "SIS123",
-      gender: "Male",
-      animalType: "Bull",
-      animalSubtype: "BeefCattle",
-      breed: "Angus",
-      origin: "Buy",
-      purpose: "Sale",
-      birthDate: new Date("2015-04-15"),  // Use a data de nascimento real
-      vaccinationStatus: "Complete",
-      weight: 540
-    };
-    const cattleMock2: ICattle = {
-      id: 876,
-      idVisualIdentification: "VIS123",
-      idSisbovIdentification: "SIS123",
-      gender: "Male",
-      animalType: "Bull",
-      animalSubtype: "BeefCattle",
-      breed: "Angus",
-      origin: "Buy",
-      purpose: "Sale",
-      birthDate: new Date("2015-04-15"),  // Use a data de nascimento real
-      vaccinationStatus: "Complete",
-      weight: 540
-    };
-
-    const cattleMock3: ICattle = {
-      id: 657,
-      idVisualIdentification: "VIS123",
-      idSisbovIdentification: "SI765673",
-      gender: "male",
-      animalType: "Bull",
-      animalSubtype: "BeefCattle",
-      breed: "Angus",
-      origin: "Buy",
-      purpose: "Sale",
-      birthDate: new Date("2019-07-25"),  // Use a data de nascimento real
-      vaccinationStatus: "Pendency",
-      weight: 324
-    };
-
-
-    this.addCattle(cattleMock);
-    this.addCattle(cattleMock2);
-    this.addCattle(cattleMock3);
-
-
-  }
+  private apiUrl = environment.apiUrl;
   private events: IEvent[] = []; // Armazenamento para eventos
   private cattles: ICattle[] = []; // Armazenamento para gado
+  // Array de opções para os tipos de animais
+  private animalTypes = [
+    { id: 1, isEnabled: true, description: 'Bovino' },
+    { id: 2, isEnabled: true, description: 'Ovino' },
+    { id: 3, isEnabled: true, description: 'Equino' }
 
+  ];
+
+  private animalSubTypes = [
+    { id: 1, isEnabled: true, description: 'Bezerro/Bezerra' },
+    { id: 2, isEnabled: true, description: 'Novilho/Novilha' },
+    { id: 3, isEnabled: true, description: 'Reprodutor/Reprodutora' },
+    { id: 4, isEnabled: true, description: 'Primeira' },
+    { id: 5, isEnabled: true, description: 'Segunda' },
+    { id: 6, isEnabled: true, description: 'Outros' }
+
+  ];
+
+  private origins = [
+    { id: 1, isEnabled: true, description: 'Compra' },
+    { id: 2, isEnabled: true, description: 'Inceminação' },
+    { id: 3, isEnabled: true, description: 'Outros' }
+  ];
+
+  private detinations = [
+    { id: 1, isEnabled: true, description: 'Gado de Corte' },
+    { id: 2, isEnabled: true, description: 'Gado Leiteiro' },
+    { id: 3, isEnabled: true, description: 'Gado de Trabalho<' },
+    { id: 4, isEnabled: true, description: 'Outro' }
+  ];
+
+  private vacination = [
+    { id: 1, isEnabled: true, description: 'Completa' },
+    { id: 2, isEnabled: true, description: 'Pendente' },
+    { id: 3, isEnabled: true, description: 'Não Informado' },
+    { id: 4, isEnabled: true, description: 'Outro' }
+  ];
+
+
+  constructor(private http: HttpClient) { }
+
+
+  public getCattleBreeds(): Observable<IGenericItem[]> {
+    return this.http.get<IGenericItem[]>(`${this.apiUrl}/CattleBreeds`);
+  }
   // Método para adicionar um evento
   addEvent(event: IEvent): void {
     this.events.push(event);
@@ -79,11 +78,55 @@ export class CattleDataService {
   }
 
   // Método para buscar todos os gados
-  getCattles(): ICattle[] {
-    return this.cattles;
+
+
+  public getCattles(): Observable<ICattle[]> {
+    return this.http.get<ICattle[]>(`${this.apiUrl}/Cattle`);
   }
-  getCattle(id: number): ICattle | undefined {
-    console.log(this.cattles.find(cattle => cattle.id === id))
-    return this.cattles.find(cattle => cattle.id === id);
+
+  public getCattle(id: number): Observable<ICattle> {
+    return this.http.get<ICattle>(`${this.apiUrl}/Cattle/${id}`);
+  }
+
+  public registerCattle(data: any): Observable<any> {
+    data.idProperty = 1;
+    return this.http.post(`${this.apiUrl}/Cattle`, data);
+  }
+
+  public updateCattle(data: any): Observable<any> {
+    console.log(data);
+    console.log('data')
+    return this.http.put(`${this.apiUrl}/Cattle/${data.id}`, data);
+  }
+
+  public getAnimalTypes() {
+    return this.animalTypes;
+  }
+
+  public getAnimalSubTypes() {
+    return this.animalSubTypes;
+  }
+
+  public getCattleOrigin() {
+    return this.origins;
+  }
+
+  public getCattleDestination() {
+    return this.detinations;
+  }
+
+  public getCattleVaccination() {
+    return this.vacination;
+  }
+
+  public getEventDescription(id: number): Observable<ICattleEvent[] | undefined> {
+
+
+    let events = this.http.get<ICattleEvent[]>(`${this.apiUrl}/CattleEvents/GetCattleEventByCattle/${id}`).pipe(
+  
+      map(events => events.filter(event => event.typeId === 3 && event.isActive))
+   
+    );
+    return events
   }
 }

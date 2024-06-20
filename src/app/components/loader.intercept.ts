@@ -13,6 +13,22 @@ export class LoaderInterceptor implements HttpInterceptor{
 
         this.loaderService.show();
 console.log('intercepter')
-        return next.handle(req).pipe(finalize(() => this.loaderService.hide()));
+
+ // Ler o token do armazenamento local
+ const token = localStorage.getItem('token');
+
+ // Se o token existir, clona a requisição e adiciona o token ao cabeçalho de autorização
+ if (token) {
+     req = req.clone({
+         setHeaders: {
+             Authorization: `Bearer ${token}`
+         }
+     });
+ }
+
+ return next.handle(req).pipe(
+     finalize(() => this.loaderService.hide())
+ );
+
     }
 }

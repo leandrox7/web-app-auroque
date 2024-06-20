@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                <span></span>
+                <span>Piquete</span>
+                <span></span>
+                <br><br><br>
+            </div>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="piqueteForm" (ngSubmit)="onSubmit()" class="form-container">
+            <div class="form-row">
+                <mat-form-field appearance="fill" class="form-field">
+                  <mat-label>Nome do Novo Piquete</mat-label>
+                  <input matInput formControlName ="name" required>
+                </mat-form-field>
+          
+                <mat-form-field appearance="fill" class="form-field">
+                  <mat-label>Descrição do Novo Piquete</mat-label>
+                  <input matInput formControlName="description" required>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="button" [disabled]="!piqueteForm.valid" type="submit">Adicionar</button>
+
+              </div>  
+              
+              <div formArrayName="piquetes">
+                <div *ngFor="let piquete of piquetes.controls; let i = index" [formGroupName]="i" class="form-row">
+                  
+                  <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Nome</mat-label>
+                    <input matInput readonly="true" formControlName="name">
+                  </mat-form-field>
+            
+                  <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Descrição</mat-label>
+                    <input matInput readonly="true" formControlName="description">
+                  </mat-form-field>
+            
+                </div>
+              </div>
+  
+        
+        </form>
+    </mat-card-content>
+  </mat-card>

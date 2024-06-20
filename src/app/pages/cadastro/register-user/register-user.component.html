@@ -40,9 +40,14 @@
    
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Nome de Usuário</mat-label>
-            <input matInput formControlName="username" required>
+            <input matInput formControlName="login" required>
           </mat-form-field>
-        </div>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput formControlName="birthDate" type="date" required>
+        </mat-form-field>
+      </div>
   
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
@@ -57,21 +62,34 @@
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Função na Propriedade</mat-label>
-            <input matInput formControlName="role">
+            <input matInput formControlName="roleName">
           </mat-form-field>
         </div>
   
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Telefone</mat-label>
-            <input matInput formControlName="contactInfo">
+            <input matInput formControlName="phoneNumber">
           </mat-form-field>
   
           <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Perfil de Acesso</mat-label>
+              <mat-select formControlName="userRoles" required="">
+                @for (role of roles; track role.id){
+
+                  <mat-option  [value]=role.id>
+                    {{ role.description }}
+                  </mat-option>
+                }
+                
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
-              <mat-option value="active">Ativo</mat-option>
-              <mat-option value="inactive">Inativo</mat-option>
+              <mat-option value="Active">Ativo</mat-option>
+              <mat-option value="Inactive">Inativo</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

@@ -1,6 +1,6 @@
 .container {
     display: flex; /* Ativa o layout flexível */
-    justify-content: center; // Alinha o conteúdo ao centro horizontalmente
+    justify-content: flex-start; // Alinha o conteúdo ao centro horizontalmente
     //width: 100%; /* Garante que a largura seja 100% da tela */
     //height: 100vh; /* Garante que a altura seja 100% da viewport */
     //background-image: url("https://opresenterural.com.br/wp-content/uploads/2023/02/acnb-Circuito-Nelore-de-Qualidade-vai-ao-Maranhao-pela-primeira-vez-foto-divulgacao.jpeg");
@@ -15,10 +15,17 @@
     width: 30%; /* Ocupa 40% da largura do contêiner pai */
 padding-right: 10px; 
 background-color: aqua;
+width: -webkit-fill-available;
+
 
 .app-login-image {
   min-width: 70%; /* Ocupa 60% da largura do contêiner pai */
+  margin-left: 0;
+  padding-left: 0%;
+  width: 100%;
+
 }
 }
 
-  
+.teste {
+width: -webkit-fill-available;}

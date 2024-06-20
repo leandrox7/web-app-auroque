@@ -26,7 +26,7 @@
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>CNPJ</mat-label>
-            <input matInput formControlName="cnpj" required>
+            <input matInput formControlName="cnpj">
           </mat-form-field>
   
 
@@ -37,19 +37,24 @@
 
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Endereço</mat-label>
-                <input matInput formControlName="location" required>
+                <input matInput formControlName="location" >
               </mat-form-field>
     
               <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Área</mat-label>
-                <input matInput formControlName="area" type="number" required>
+                <input matInput formControlName="area" type="number" >
               </mat-form-field>
         </div>
 
+
     
         <div class="form-row button-container">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!propertyForm.valid">Registrar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!propertyForm.valid">Salvar</button>
         </div>
       </form>
     </mat-card-content>
   </mat-card>
+
+  <br>
+  <br>
+  <app-piquete></app-piquete>

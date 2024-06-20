@@ -1,17 +1,29 @@
 <mat-card style="margin-top: 100px;">
-    <mat-card-header>
-      <mat-card-title>
-        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-          <span></span>
-          <span>Histórico</span>
-        </div>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <mat-card-header>
+    <mat-card-title>
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <span></span>
+        <span>{{title}}</span>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container ngIf="events && events.length > 0; else noInfo">
+      <mat-vertical-stepper>
+        @for (event of events; track event) {
+          <mat-step ngFor="let event of events; trackBy: trackById" [label]="event.title">
+            <p>{{event.description}}</p>
+            <span>Data: {{ event?.date }}</span>
 
-        <div class="form-row">
-          <span> Nenhuma informaçao disponivel no momento</span>
-        </div>
-
-    </mat-card-content>
+          </mat-step>
+        }
+       
+      </mat-vertical-stepper>
+    </ng-container>
+    <ng-template #noInfo>
+      <div class="form-row">
+        <span>Nenhuma informação disponível no momento</span>
+      </div>
+    </ng-template>
+  </mat-card-content>
 </mat-card>

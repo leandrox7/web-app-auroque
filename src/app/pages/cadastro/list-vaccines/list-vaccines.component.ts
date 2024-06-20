@@ -1,6 +1,6 @@
 // src/app/list-vaccines/list-vaccines.component.ts
 import { Component, OnInit } from '@angular/core';
-import { VaccineService } from '../../../services/vaccine.service';
+import { PharmacyService } from '../../../services/pharmacy.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; // Ensure RouterModule and Routes are imported
 import { CommonModule } from '@angular/common';
@@ -11,59 +11,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { IPharmacyItem } from '../../../Interface/IPharmacyItem';
+import { DatePipe } from '@angular/common';
 
-
-export interface Vaccine {
-  id:number
-  name: string;
-  manufacturer: string;
-  type: string;
-  doses: number;
-  additionalInfo: string;
-}
-
-const ELEMENT_DATA: Vaccine[] = [
-  {
-    id:1,
-    name: 'Brucelose RB51',
-    manufacturer: 'Zoetis Inc.',
-    type: 'Vivo Atenuado',
-    doses: 1,
-    additionalInfo: 'Previne brucelose, administrada em bezerras fêmeas entre 4 a 12 meses de idade.'
-  },
-  {
-    id:2,
-    name: 'IBR-PI3-BVD',
-    manufacturer: 'Boehringer Ingelheim',
-    type: 'Vírus Vivo Modificado',
-    doses: 2,
-    additionalInfo: 'Vacina respiratória contra os vírus IBR, PI3 e BVD tipos 1 e 2. Necessário reforço após a dose inicial.'
-  },
-  {
-    id:3,
-    name: 'Vacina Clostridial',
-    manufacturer: 'Merck Saúde Animal',
-    type: 'Remedio',
-    doses: 2,
-    additionalInfo: 'Protege contra doenças clostridiais como carbúnculo sintomático, edema maligno. Duas doses inicialmente, depois anualmente.'
-  },
-  {
-    id:4,
-    name: 'Leptospirose',
-    manufacturer: 'Elanco Saúde Animal',
-    type: 'Antibiotico',
-    doses: 2,
-    additionalInfo: 'Previne leptospirose; administrar duas doses no primeiro ano seguido de reforços anuais.'
-  },
-  {
-    id:5,
-    name: 'Vacina contra Podridão dos Cascos',
-    manufacturer: 'Pfizer Saúde Animal',
-    type: 'Vacina',
-    doses: 2,
-    additionalInfo: 'Para prevenção de podridão dos cascos em bovinos, curso inicial de duas doses, depois reforço anual.'
-  }
-];
 
 
 
@@ -76,26 +26,55 @@ const ELEMENT_DATA: Vaccine[] = [
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
+  providers:[DatePipe],
 
 })
 export class ListVaccinesComponent implements OnInit {
 
-  constructor(private router: Router, private vaccineService: VaccineService) { }
-  displayedColumns: string[] = ['id','name', 'manufacturer', 'type', 'doses', 'additionalInfo'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  constructor(private router: Router, private pharmacyService: PharmacyService, private datePipe: DatePipe ) { }
+  displayedColumns: string[] = ['id','name', 'manufacturer', 'type', 'doses', 'expirationDate','additionalInfo'];
+  dataSource!: MatTableDataSource<IPharmacyItem>;
 
+  ngOnInit(): void {
+    this.pharmacyService.getPharmacyItems().subscribe(items => {
+      this.dataSource = new MatTableDataSource(items);
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnInit(): void {
-  }
   editVaccine(vaccineId: number): void {
     this.router.navigate(['/home/vacina', vaccineId]); // Adjust route as needed
   }
   addVaccine(){
     this.router.navigate(['/home/vacina']); // Adjust route as needed
+  }
+  isExpired(expirationDate: Date): boolean {
+    const today = new Date();
+    const expDate = new Date(expirationDate);
+    return expDate <= today;
+  }
+  formatDate(date: string): string {
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
+  }
+
+  GetType(type: number): string{
+    switch (type) {
+      case 1:
+        return 'Remédio';
+      case 2:
+        return 'Carrapaticida';
+      case 3:
+        return 'Antibiótico';
+      case 4:
+        return 'Vermífugo';
+      case 5:
+        return 'Suplemento';
+      default:
+        return 'ID não encontrado';
+    }
   }
 }

@@ -13,17 +13,25 @@
           
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Identificação Visual</mat-label>
-            <input matInput formControlName="idVisualIdentification" required="true">
+       
+            @if(isEdition){
+              <input matInput formControlName="visualId" [readonly]="true" #tooltip="matTooltip"
+              matTooltip="Para alterar cadastre um evento de perda de brinco">
+            
+            }
+            @else{
+              <input matInput formControlName="visualId">
+            }
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Identificação Sisbov</mat-label>
-            <input matInput formControlName="idSisbovIdentification">
+            <input matInput formControlName="sisbovId">
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
-            <mat-label>ID Auroque</mat-label>
-            <input matInput formControlName="id">
+            <mat-label>Código de rastreamento</mat-label>
+            <input matInput formControlName="id" [disabled]="true" readonly="true">
           </mat-form-field>
 
       
@@ -34,7 +42,7 @@
 
             <mat-label>Gênero</mat-label>
             <mat-select formControlName="gender">
-              <mat-option selected value="Male">Macho</mat-option>
+              <mat-option  value="Male">Macho</mat-option>
               <mat-option value="Female">Fêmea</mat-option>
             </mat-select>
           </mat-form-field>
@@ -42,77 +50,91 @@
   
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Animal</mat-label>
-            <mat-select formControlName="animalType">
-              <mat-option selected value="Male">Touro</mat-option>
-              <mat-option value="Bull">Boi</mat-option>
-              <mat-option value="Cow">Vaca</mat-option>
-              <mat-option value="Other">Outros</mat-option>
+            <mat-select formControlName="animalTypeId">
+              @for (type of animalTypes; track type.id){
+  
+                <mat-option  [value]=type.id>
+                  {{ type.description }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Sub classe</mat-label>
-            <mat-select formControlName="animalSubtype">
-              <mat-option value="Male" selected>Touro Reprodutor</mat-option>
-              <mat-option value="BeefCattle">Boi de Corte</mat-option>
-              <mat-option value="Heifer">Novilha</mat-option>
-              <mat-option value="Female">Primeira</mat-option>
-              <mat-option value="Female">Segunda</mat-option>
+            <mat-select formControlName="animalSubtypeId">
+              @for (subtype of animalSubTypes; track subtype.id){
+  
+                <mat-option  [value]=subtype.id>
+                  {{ subtype.description }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
 
           <div class="form-row">
             <mat-form-field appearance="fill" class="form-field">
-
                 <mat-label>Raça</mat-label>
-                <mat-select formControlName="breed">
-                    <mat-option selected value="Angus">Angus</mat-option>
-                    <mat-option value="Other">Outro</mat-option>
+                <mat-select formControlName="breedId" required="false">
+                  @for (breed of breeds; track breed.id){
+  
+                    <mat-option  [value]=breed.id>
+                      {{ breed.description }}
+                    </mat-option>
+                  }
                 </mat-select>
             </mat-form-field>
 
 
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Origem</mat-label>
-                <mat-select formControlName="origin">
-                    <mat-option selected value="Buy">Compra</mat-option>
-                    <mat-option value="Female">Inceminação</mat-option>
-                    <mat-option value="Other">Outro</mat-option>
+                <mat-select formControlName="originId">
+                  @for (origin of origins; track origin.id){
+  
+                    <mat-option  [value]=origin.id>
+                      {{ origin.description }}
+                    </mat-option>
+                  }
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="form-field">
-                <mat-label>Objetivo da Criacao</mat-label>
-                <mat-select formControlName="purpose">
-                    <mat-option value="Sale">Venda</mat-option>
-                    <mat-option value="Female">Leiteira</mat-option>
-                    <mat-option value="Female">Corte</mat-option>
-                    <mat-option value="Female">Outro</mat-option>
+                <mat-label>Piquete</mat-label>
+                <mat-select formControlName="piqueteId">
+                  @for (piquete of piquetes; track piquete.id){
+  
+                    <mat-option  [value]=piquete.id>
+                      {{ piquete.name }}
+                    </mat-option>
+                  }
                 </mat-select>
             </mat-form-field>
 
 
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Data de Nascimento</mat-label>
-                <input matInput type="date" formControlName="birthDate" required>
+                <input matInput type="date" formControlName="birthDate">
             </mat-form-field>
         </div>
 
         <div class="form-row">
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Vacinação</mat-label>
-                <mat-select formControlName="vaccinationStatus">
-                    <mat-option value="Complete" selected>Completa</mat-option>
-                    <mat-option value="Pendency">Pendente</mat-option>
-                    <mat-option value="Female">Nao Informado</mat-option>
-                    <mat-option value="Female">Outro</mat-option>
+                <mat-select formControlName="vaccinationStatusId">
+                  @for (vaccination of vaccinations; track vaccination.id){
+  
+                    <mat-option  [value]=vaccination.id>
+                      {{ vaccination.description }}
+                    </mat-option>
+                  }
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="form-field">
                 <mat-label>Peso</mat-label>
-                <input matInput formControlName="weight">
+                <input matInput formControlName="weight" [readonly]="true" [disabled]="true" #tooltip="matTooltip"
+                matTooltip="Para alterar cadastre um evento de pesagem">
               </mat-form-field>
         </div>
   
@@ -121,37 +143,40 @@
         </div>
   
         <div class="form-row button-container">
-      <!--
- <button mat-raised-button color="primary" type="submit" [disabled]="!cattleForm.valid">Registrar</button>
-      -->   
-      <button mat-raised-button color="primary" type="submit">Registrar</button>
+
+          <button mat-raised-button color="primary" (click)="redirectToCattleList()">Cancelar</button>
+
+          @if(isEdition)
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!cattleForm.valid">Salvar</button>
+
+          }
+          @else
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!cattleForm.valid">Registrar</button>
+
+          }
+
         </div>
       </form>
     </mat-card-content>
   </mat-card>
 
-  <!--   Gravidez-->
-  <mat-card style="margin-top: 100px;">
-    <mat-card-header>
-      <mat-card-title>
-        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-          <span></span>
-          <span>Gestacional</span>
-        </div>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="form-row">
-            <span> Nenhuma informaçao disponivel no momento</span>
-          </div>
-    </mat-card-content>
-</mat-card>
+  
+
+@if( showCattleEvents){
+
+  <!-- Informação Reprodutiva -->
+<app-register-cattles-history title="Informação Reprodutiva" [isReprodutive]="true"></app-register-cattles-history>
 
 <!-- Histórico -->
-<app-register-cattles-history></app-register-cattles-history>
+<app-register-cattles-history title="Histórico" [isReprodutive]="false"></app-register-cattles-history>
 
-<!-- Registrar alteraçao -->
-<app-register-cattles-event-traker></app-register-cattles-event-traker>
 
-<!--   Genealogia-->
-<app-register-cattles-genealogy> </app-register-cattles-genealogy>
+  <!-- Registrar alteraçao -->
+  <app-register-cattles-event-traker></app-register-cattles-event-traker>
+  
+  <!--   Genealogia-->
+  <app-register-cattles-genealogy> </app-register-cattles-genealogy>
+}
+

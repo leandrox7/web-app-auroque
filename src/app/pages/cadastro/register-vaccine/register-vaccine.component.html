@@ -22,7 +22,12 @@
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Fabricante</mat-label>
-            <input matInput formControlName="manufacturer" required>
+            <input matInput formControlName="manufacturer" >
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Lote</mat-label>
+            <input matInput formControlName="batch">
           </mat-form-field>
 
         </div>
@@ -33,47 +38,84 @@
 
           <mat-form-field appearance="fill" class="form-field">
               <mat-label>Tipo</mat-label>
-              <mat-select matSelect formControlName="type">
+              <mat-select matSelect formControlName="pharmacyTypeId">
                 @for (type of types; track type) {
-                  <mat-option [value]="type.value">{{type.viewValue}}</mat-option>
+                  <mat-option [value]="type.id">{{type.description}}</mat-option>
                 }
               </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Unidade de Medida</mat-label>
-            <mat-select matSelect formControlName="unity">
-              @for (unidade of unidades; track unidade) {
-                <mat-option [value]="unidade.value">{{unidade.viewValue}}</mat-option>
+            <mat-select matSelect formControlName="pharmacyUnitTypeId">
+              @for (unidade of unitys; track unidade) {
+                <mat-option [value]="unidade.id">{{unidade.description}}</mat-option>
               }
             </mat-select>
         </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Quantidade</mat-label>
-            <input matInput type="number" formControlName="doses" min="1">
+            <input matInput type="number" formControlName="quantity" min="1">
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Total</mat-label>
-    <input matInput type="number" FormControlName="valor" class="example-right-align" placeholder="0">
-    <span matTextPrefix>R$&nbsp;</span>
-    <span matTextSuffix>,00</span>
+            <mat-label>Valor Total</mat-label>
+            <input matInput type="number" formControlName="price">
+          
+
           </mat-form-field>
 
         </div>
+
+
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Data de Validade</mat-label>
+            <input matInput type="date" formControlName="expirationDate">
+          </mat-form-field>
+
+         
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="isActive">
+              <mat-option value="Active">Ativo</mat-option>
+              <mat-option value="Inactive">Inativo</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Informações Adicionais</mat-label>
             <textarea matInput formControlName="additionalInfo"></textarea>
           </mat-form-field>
         </div>
+
+      
+
+
         <div class="form-row">
           
         </div>
-<div class="form-row button-container">
-  <button mat-raised-button color="primary" type="submit" [disabled]="!vaccineForm.valid">Registrar</button>
-</div>
+        <div class="form-row button-container">
+
+          <button mat-raised-button color="primary" (click)="redirectToPharmacyList()">Cancelar</button>
+
+          @if(isEdition)
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!vaccineForm.valid">Salvar</button>
+
+          }
+          @else
+          {
+            <button mat-raised-button color="primary" type="submit" [disabled]="!vaccineForm.valid">Registrar</button>
+
+          }
+
+        </div>
       </form>
     </mat-card-content>
   </mat-card>

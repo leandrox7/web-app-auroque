@@ -11,6 +11,10 @@
         </mat-card-header>
         <mat-card-content>
     
+          @if(true){
+            <span>Nenhuma informação disponivel no momento</span>
+          }
+          @else{
             <div class="form-row">
                 <span></span>
                 <span>Pai</span>
@@ -55,6 +59,7 @@
                 <button mat-raised-button color="primary" [disabled]="true" type="submit">Salvar</button>
     
               </div>
+            }
         </mat-card-content>
     </mat-card>
     </form>
