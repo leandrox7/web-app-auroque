@@ -25,8 +25,12 @@ export class AuthService {
     }
   }
 
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  }
+
   getToken(): string | null {
-    if (this.isLocalStorageAvailable()) {
+    if (this.isBrowser()) {
       return localStorage.getItem('token');
     }
     return null;
