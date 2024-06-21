@@ -33,7 +33,7 @@ export class AuthService {
     if (this.isBrowser()) {
       return localStorage.getItem('token');
     }
-    return null;
+    return '';
   }
   isTokenExpired(token: string): boolean {
     try {
