@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, afterNextRender } from '@angular/core';
 import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -29,6 +29,7 @@ export class AuthService {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
+  
   getToken(): string | null {
     if (this.isBrowser()) {
       return localStorage.getItem('token');

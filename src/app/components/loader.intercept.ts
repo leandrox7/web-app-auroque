@@ -12,19 +12,23 @@ export class LoaderInterceptor implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
 
         this.loaderService.show();
-console.log('intercepter')
 
- // Ler o token do armazenamento local
- const token = localStorage.getItem('token');
+        // Verificar se está no ambiente do navegador
+        const isBrowser = typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
 
- // Se o token existir, clona a requisição e adiciona o token ao cabeçalho de autorização
- if (token) {
-     req = req.clone({
-         setHeaders: {
-             Authorization: `Bearer ${token}`
-         }
-     });
- }
+        if (isBrowser) {
+            // Ler o token do armazenamento local
+            const token = localStorage.getItem('token');
+
+            // Se o token existir, clona a requisição e adiciona o token ao cabeçalho de autorização
+            if (token) {
+                req = req.clone({
+                    setHeaders: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            }
+        }
 
  return next.handle(req).pipe(
      finalize(() => this.loaderService.hide())

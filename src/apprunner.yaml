@@ -1,0 +1,17 @@
+version: 1.0
+service:
+  name: angular-app-runner
+  sourceConfiguration:
+    imageRepository:
+      imageIdentifier: <your-docker-image-repository-url>
+      imageConfiguration:
+        port: 80
+      imageRepositoryType: ECR
+  instanceConfiguration:
+    instanceRoleArn: <your-iam-role-arn>
+    cpu: 1024
+    memory: 2048
+  autoScalingConfigurationArn: <your-auto-scaling-configuration-arn>
+  tags:
+    - key: project
+      value: angular-app
